@@ -1,0 +1,128 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark" style="background-color: rgb(39, 101, 151)">
+  <a class="navbar-brand" href="#" style="color: black; font-weight: bold; margin-left: 2%;">Products</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/" style="color: black; font-weight: bold;">Home</a>
+      </li>
+      <!-- <li class="nav-item active">
+        <a class="nav-link" routerLink="/products" style="color: black; font-weight: bold;">Products</a>
+      </li> -->
+      <li class="nav-item active">
+          <a class="nav-link" routerLink="/users" style="color: black; font-weight: bold;">Users</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<form class="form-horizontal" [formGroup]="productForm">
+    <h1 style="text-align: center;">Add your Products</h1>
+    <div style="margin-left: 10%; margin-right: 10%;">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Product Name:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="txtProductName" formControlName="productName"
+            placeholder="Name of Product">
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Product Description :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="txtProductDescription" formControlName="productDescription"
+            placeholder="Product Description">
+        </div>
+      </div>
+      <br />
+      <div class="form-group"> 
+        <label class="control-label col-sm-2" for="pwd">Product Cost:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="txtProductPrice" formControlName="productPrice" placeholder="Price of Product">
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Product Stock Available :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="txtStock" formControlName="productStock" placeholder="Stock Available">
+        </div>
+      </div>
+    <br />
+     <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary" style="color: black; font-weight: bold; background-color: skyblue;" (click)="PostProduct(productForm.value)">Submit</button>
+          </div>
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary" style="color: black; font-weight: bold; background-color: skyblue;"  (click)="UpdateProduct(productForm.value)">Update</button>
+          </div>
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary" style="color: black; font-weight: bold; background-color: skyblue;"  (click)="Clear(productForm.value)">Clear</button>
+          </div>
+        </div>
+      </div>
+    <br />
+    </div>
+    <div>
+      <div class="alert alert-success" style="text-align: center;"><b>Products List</b></div>
+      <div class="table-responsive" style="text-align: center;">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prd of (ProductList | async) |keyvalue |slice:3; index as i">
+            <th scope="row" >{{ i + 1 }}</th>
+            <td>{{prd.value|json}}</td>
+            <td>{{prd.value|json}}</td>
+             <!-- <td>{{prd.productName}}</td>
+            <td>{{prd.productDescription}}</td>
+            <td>{{prd.productPrice}}</td>
+            <td>{{prd.productStock}}</td>
+            <td><button type="button" class="btn1" matTooltip="Click Edit Button" (click)='ProductDetailsToEdit(prd.productId)'>Edit</button>
+              |
+              <button type="button" class="btn1" matTooltip="Click Delete Button" (click)="DeleteProduct(prd.productId)">Delete</button>
+            </td>  -->
+          </tr>
+        </tbody>
+        <!-- <tfoot>  
+          <tr>  
+              <td style="align-items: center;" colspan="6">  
+                  <span class="form-group pull-left page-size form-inline">  
+                      <select id="ddlPageSize" class="form-control control-color"  
+                              ng-model="pageSizeSelected"  
+                              ng-change="changePageSize()">  
+                          <option value="2">2</option>  
+                          <option value="10">10</option>  
+                          <option value="25">25</option>  
+                          <option value="50">50</option>  
+                      </select>  
+                  </span>  
+                  <div class="pull-right">  
+                   <mat-paginator [length]="3" [pageSizeOptions]="[5, 10, 50, 100]" aria-label="Select page">
+                    </mat-paginator>
+                    <mat-paginator total-items="totalCount" ng-change="pageChanged()" items-per-page="pageSizeSelected" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPages"></mat-paginator> 
+                      <a class="btn btn-primary">Page: {{pageIndex}} / {{numPages}}</a>
+                  </div>  
+              </td>  
+          </tr>  
+      </tfoot>-->
+        </table>
+        <!-- --------------------------------- -->
+
+        <!-- --------------------------------- -->
+      </div>
+    </div>
+    </div>
+  </form>
